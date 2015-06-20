@@ -1,4 +1,5 @@
 var pads = document.querySelectorAll('.pad');
+var sounds = ['1','2','3']
 var defaultUrls = ['../../examples/2.wav', '../../examples/3.wav', '../../examples/4.wav',
         '../../examples/5.wav', '../../examples/6.wav', '../../examples/7.wav', '../../examples/8.wav',
          '../../examples/9.wav', '../../examples/10.wav', '../../examples/11.wav', '../../examples/12.wav',];
@@ -27,6 +28,32 @@ var pad = function(element, url, key) {
   this.buffer = undefined;
   this.addListeners();
 };
+
+var sound = function(element, url) {
+  this.el = element;
+  this.url = url;
+  this.source = undefined;
+  this.buffer = undefined;
+}
+
+sound.prototype.play = function() {
+  if (this.needBuffer()) {
+    var self = this;
+    loadSound(this.url, function(src) { self.onLoaded.call(self, src) });
+  } else {
+    console.log('WAT')
+    this.onLoaded(this.buffer);
+  }
+};
+
+sound.prototype.stop = function() {
+  this.source.stop(audioContext.currentTime);
+};
+
+sound.prototype.needBuffer = function () {
+  return this.buffer === undefined;
+};
+
 
 pad.prototype.addListeners = function () {
   var self = this;
