@@ -96,19 +96,14 @@ RhythmSample.play = function() {
     source.start(time);
   }
 
-  var kick = bufferLoader.bufferList[0];
-  var snare = bufferLoader.bufferList[1];
-  var hihat = bufferLoader.bufferList[2];
-
-  // We'll start playing the rhythm 100 milliseconds from "now"
-  var startTime = context.currentTime + 0.100;
-  var kicks = [1.0, 2.0, 3.0, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5];
-  var snares = [0.5, 1.5, 2.5, 3.5, 4.5, 5.0, 5.5, 6.0, 6.5];
-  for (var hit = 0; hit < kicks.length; hit++){
-    playSound(kick, kicks[hit]);
-  }
-  for (var hit = 0; hit < snares.length; hit++){
-    playSound(snare, snares[hit]);
+  var tracks = [[1.0, 2.0, 3.0, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5],[0.5, 1.5, 2.5, 3.5, 4.5, 5.0, 5.5, 6.0, 6.5]];
+  for (var track = 0; track < tracks.length; track++) {
+    // We'll start playing the rhythm 100 milliseconds from "now"
+    var trackAudio = bufferLoader.bufferList[track];
+    var startTime = context.currentTime + 0.100;
+    for (var hit = 0; hit < tracks[track].length; hit++){
+      playSound(trackAudio, tracks[track][hit]);
+    }
   }
 
 };
