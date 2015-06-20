@@ -102,10 +102,13 @@ RhythmSample.play = function() {
 
   // We'll start playing the rhythm 100 milliseconds from "now"
   var startTime = context.currentTime + 0.100;
-  var hits = [1.0, 2.0, 3.0, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5]
-  for (var hit = 0; hit < hits.length; hit++){
-    playSound(kick, hits[hit]);
+  var kicks = [1.0, 2.0, 3.0, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5];
+  var snares = [0.5, 1.5, 2.5, 3.5, 4.5, 5.0, 5.5, 6.0, 6.5];
+  for (var hit = 0; hit < kicks.length; hit++){
+    playSound(kick, kicks[hit]);
   }
-
+  for (var hit = 0; hit < snares.length; hit++){
+    playSound(snare, snares[hit]);
+  }
 
 };
