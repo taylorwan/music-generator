@@ -11,7 +11,7 @@ response = urllib2.urlopen(url)
 sounds = json.load(response)
 for i in range(0,8):
 	id = sounds['results'][i]['id']
-	url = "http://www.freesound.org/apiv2/sounds/%s/?token=4c634403c33afe15b13bdb8d9925bf33fa1fb702&" % id
+	url = "http://www.freesound.org/apiv2/sounds/%s/?token=%s&" % (id,token)
 	response = urllib2.urlopen(url)
 	sound = json.load(response)
 	file = sound['previews']['preview-lq-mp3']
